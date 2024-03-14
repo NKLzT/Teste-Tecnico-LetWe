@@ -60,22 +60,28 @@ public class ProdutosRepository {
     }
 
     public Produto atualizarProduto(Produto produto) {
-        if (produto != null && produto.getId() != null) {
-            EntityTransaction transaction = manager.getTransaction();
-            try {
-                transaction.begin();
-                produto = manager.merge(produto);
-                transaction.commit();
-            } catch (RuntimeException e) {
-                if (transaction.isActive()) {
-                    transaction.rollback();
-                }
-                throw e;
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            Produto produtoExistente = getProduto(produto.getId());
+            if (produtoExistente != null) {
+                produtoExistente.setNome(produto.getNome());
+                produtoExistente.setDescricao(produto.getDescricao());
+                produtoExistente.setPreco(produto.getPreco());
+                manager.merge(produtoExistente);
+            } else {
+                throw new IllegalArgumentException("Produto não encontrado para atualização.");
             }
-            return produto;
+            transaction.commit();
+            return produtoExistente;
+        } catch (RuntimeException e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        throw new IllegalArgumentException("Produto não pode ser nulo e deve ter um ID válido.");
     }
+
 
     public List<Produto> listarTodos() {
         TypedQuery<Produto> query = manager.createQuery("from Produto", Produto.class);

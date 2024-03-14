@@ -4,11 +4,16 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Gestão de Produtos</title>
+	<title>Atualizar Produto</title>
 </h:head>
 <h:body>
 	<h:form>
 		<h:panelGrid columns="2">
+			<h:outputLabel value="ID:" for="id" />
+			<h:inputText id="id" value="#{xyz.produto.id}" required="true"
+				requiredMessage="O campo ID é obrigatório." />
+			<h:message for="id" style="color:red" />
+
 			<h:outputLabel value="Nome:" for="nome" />
 			<h:inputText id="nome" value="#{xyz.produto.nome}" required="true"
 				requiredMessage="O campo Nome é obrigatório." />
@@ -25,30 +30,7 @@
 			<h:message for="preco" style="color:red" />
 		</h:panelGrid>
 
-		<h:commandButton value="Salvar" action="#{xyz.salvar}" />
-		<h:commandButton value="Atualizar" action="#{xyz.prepararAtualizacao}" immediate="true"/>
-		<h:commandButton value="Listar Produtos"
-			action="#{xyz.listarProdutos}" immediate="true" />
-
-		<h:dataTable value="#{xyz.produtos}" var="produto"
-			rendered="#{not empty xyz.produtos}">
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-                #{produto.id}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-                #{produto.nome}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Descrição</f:facet>
-                #{produto.descricao}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Preço</f:facet>
-                #{produto.preco}
-            </h:column>
-		</h:dataTable>
+		<h:commandButton value="Atualizar" action="#{xyz.atualizar()}" />
 	</h:form>
 </h:body>
 </html>
