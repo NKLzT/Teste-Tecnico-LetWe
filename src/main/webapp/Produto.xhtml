@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Gestão de Produtos</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Nome:" for="nome" />
+            <h:inputText id="nome" value="#{xyz.produto.nome}" required="true" requiredMessage="O campo Nome é obrigatório." />
+            <h:message for="nome" style="color:red" />
+
+            <h:outputLabel value="Descrição:" for="descricao" />
+            <h:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
+
+            <h:outputLabel value="Preço:" for="preco" />
+            <h:inputText id="preco" value="#{xyz.produto.preco}" required="true" requiredMessage="O campo Preço é obrigatório.">
+                <f:convertNumber minFractionDigits="2" />
+            </h:inputText>
+            <h:message for="preco" style="color:red" />
+        </h:panelGrid>
+
+        <h:commandButton value="Salvar" action="#{xyz.salvar}" />
+    </h:form>
+</h:body>
+</html>
