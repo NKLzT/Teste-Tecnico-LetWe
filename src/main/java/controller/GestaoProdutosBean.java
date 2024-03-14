@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -10,9 +12,7 @@ import service.ProdutosService;
 
 @Named("xyz")
 @RequestScoped
-public class GestaoProdutosBean implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class GestaoProdutosBean {
 
     @Inject
     private ProdutosService produtosService;
@@ -35,5 +35,15 @@ public class GestaoProdutosBean implements Serializable {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+    
+    private List<Produto> produtos;
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void listarProdutos() {
+        produtos = produtosRepository.listarTodos();
     }
 }

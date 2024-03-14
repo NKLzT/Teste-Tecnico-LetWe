@@ -24,6 +24,26 @@
         </h:panelGrid>
 
         <h:commandButton value="Salvar" action="#{xyz.salvar}" />
+        <h:commandButton value="Listar Produtos" action="#{xyz.listarProdutos}" immediate="true" />
+        
+        <h:dataTable value="#{xyz.produtos}" var="produto" rendered="#{not empty xyz.produtos}">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{produto.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                #{produto.nome}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Descrição</f:facet>
+                #{produto.descricao}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Preço</f:facet>
+                #{produto.preco}
+            </h:column>
+        </h:dataTable>
     </h:form>
 </h:body>
 </html>
