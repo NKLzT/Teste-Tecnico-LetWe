@@ -19,11 +19,13 @@ Polimorfismo é basicamente a capacidade de um objeto poder ser referenciado de 
 No Java o polimorfismo permite que um objeto seja tratado como uma instacia de sua propria classe, de uma suplerclasse ou de qualquer interface que a classe implemente.
 
 // Classe abstrata Animal
+
 abstract class Animal {
     abstract void som();
 }
 
 // Classe Cachorro que herda de Animal
+
 class Cachorro extends Animal {
     void som() {
         System.out.println("Au Au");
@@ -31,6 +33,7 @@ class Cachorro extends Animal {
 }
 
 // Classe Gato que herda de Animal
+
 class Gato extends Animal {
     void som() {
         System.out.println("Miau");
@@ -38,15 +41,17 @@ class Gato extends Animal {
 }
 
 // Classe principal
-public class Main {
+
+public class Main { 
     public static void main(String[] args) {
         Animal meuCachorro = new Cachorro(); // Cachorro é um Animal
         Animal meuGato = new Gato(); // Gato é um Animal
-
         meuCachorro.som(); // Imprime "Au Au"
         meuGato.som(); // Imprime "Miau"
     }
 }
+
+
 b. Diferencie entre herança e composição em programação orientada a objetos.
 
 Herança permite que uma classe herde os campos e métodos de outra classe. Por exemplo, um Cachorro é um Animal. 
