@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Gestão de Produtos</title>
+	<title>Atualizar Produto</title>
 </h:head>
 <h:body>
 	<h:form id="form">
@@ -25,13 +25,14 @@
 			</p:inputText>
 			<p:message for="preco" style="color:red" />
 		</p:panelGrid>
-
 		<p:commandButton value="Salvar" action="#{xyz.salvar}" update=":form" />
-		<p:commandButton value="Atualizar" action="#{xyz.prepararAtualizacao}"
-			immediate="true" update=":form" />
 		<p:commandButton value="Listar Produtos"
 			action="#{xyz.listarProdutos}" immediate="true" update=":form" />
+		<p:commandButton value="Atualizar" action="#{xyz.prepararAtualizacao}"
+			immediate="true" update=":form" />
 
+		<p:commandButton value="Excluir" onclick="PF('dialogExcluir').show()"
+			type="button" />
 
 		<p:dataTable value="#{xyz.produtos}" var="produto"
 			rendered="#{not empty xyz.produtos}">
@@ -52,24 +53,23 @@
                 #{produto.preco}
             </p:column>
 		</p:dataTable>
-
-
-		<p:commandButton value="Excluir" onclick="PF('dialogExcluir').show()"
-			type="button" />
-
-		<p:dialog header="Excluir Produto" widgetVar="dialogExcluir"
-			modal="true">
-			<p:outputLabel value="ID do produto a excluir:" for="idExclusao" />
-			<p:inputText id="idExclusao" value="#{xyz.idProdutoExclusao}"
-				required="true" requiredMessage="O campo ID é obrigatório." />
-			<p:message for="idExclusao" style="color:red" />
-
-			<p:commandButton value="Confirmar exclusão" action="#{xyz.excluir}"
-				oncomplete="PF('dialogExcluir').hide()" update=":form"
-				process="@this idExclusao" />
-
-
-		</p:dialog>
 	</h:form>
+
 </h:body>
+<h:form id="form2">
+
+	<p:dialog header="Excluir Produto" widgetVar="dialogExcluir"
+		modal="true">
+		<p:outputLabel value="ID do produto a excluir:" for="idExclusao" />
+		<p:inputText id="idExclusao" value="#{xyz.idProdutoExclusao}"
+			required="true" requiredMessage="O campo ID é obrigatório." />
+		<p:message for="idExclusao" style="color:red" />
+
+		<p:commandButton value="Confirmar exclusão" action="#{xyz.excluir}"
+			oncomplete="PF('dialogExcluir').hide()" update=":form"
+			process="@this idExclusao" />
+
+
+	</p:dialog>
+</h:form>
 </html>

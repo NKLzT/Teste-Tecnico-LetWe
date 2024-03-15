@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
 import javax.enterprise.context.RequestScoped;
 import model.Produto;
 import repository.ProdutosRepository;
@@ -65,8 +64,7 @@ public class GestaoProdutosBean {
 			produtosRepository.atualizarProduto(produto);
 			produto = new Produto();
 		} catch (IllegalArgumentException e) {
-			// Lógica de tratamento de erro, se necessário
-			// Por exemplo: exibir uma mensagem de erro para o usuário
+			System.out.println("ERROR: " + e);
 		}
 	}
 	

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import model.Produto;
+import util.Transacional;
 
 public class ProdutosRepository {
 
@@ -32,6 +33,7 @@ public class ProdutosRepository {
 		return query.getResultList();
 	}
 
+	@Transacional
 	public Produto salvarProduto(Produto produto) {
 		try {
 			produto = manager.merge(produto);
@@ -51,6 +53,7 @@ public class ProdutosRepository {
 		}
 	}
 
+	@Transacional
 	public Produto atualizarProduto(Produto produto) {
 		try {
 			Produto produtoExistente = getProduto(produto.getId());
