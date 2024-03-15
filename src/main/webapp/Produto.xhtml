@@ -8,12 +8,6 @@
 	<title>Gestão de Produtos</title>
 </h:head>
 <h:body>
-	<h:form if="pepsquisa">
-		<p:outputLabel value="Pesquisar por Nome:" for="inputPesquisa" />
-		<p:inputText id="inputPesquisa" value="#{xyz.nomePesquisa}" />
-		<p:commandButton value="Pesquisar" action="#{xyz.realizarPesquisa}"
-			update=":form" />
-	</h:form>
 	<h:form id="form">
 		<p:panelGrid columns="2">
 			<p:outputLabel value="Nome:" for="nome" />
