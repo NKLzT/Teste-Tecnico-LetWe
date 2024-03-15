@@ -128,3 +128,40 @@ Uso moderado de consultas de agregação: Funções como COUNT, SUM, AVG, MAX e 
 Análise de Consultas: A cláusula EXPLAIN do MySQL é uma ferramenta poderosa que nos ajuda a entender como nossas consultas estão sendo executadas.
 Isso pode nos ajudar a identificar onde as otimizações podem ser feitas.
 Normalização de Dados: A normalização pode reduzir a redundância de dados e melhorar a eficiência das consultas.
+
+Teste Prático: Desenvolvimento Java com PrimeFaces e Hibernate
+
+Desenvolva uma aplicação web simples utilizando Java, PrimeFaces e Hibernate, que permita ao usuário realizar as operações básicas de CRUD (Create, Read, Update, Delete) em uma entidade "Produto". A entidade deve ter, no mínimo, os seguintes campos: ID, Nome, Descrição e Preço.
+
+Requisitos:
+
+Use JSF com PrimeFaces para criar a interface do usuário.
+Utilize Hibernate para a camada de persistência.
+Implemente as operações CRUD completas para a entidade "Produto".
+Garanta validação adequada dos dados na camada do modelo
+
+## 🌐Tecnologias
+
+- Java 
+- JPA
+- JSF
+- PrimeFaces
+- Hibernate
+- Maeven
+- Mockito
+- Junit (Mesmo não sendo requisitado tomei a liberdade de escrever alguns testes unitarios.)
+- Mysql
+- Tomcat(8.5.6)
+
+## 📕Instalação
+
+**Recomendações**
+- É recomendável que você tenha instalado o Google Chrome ou Edge
+- Eu recomendo usar o Eclipse como IDE de desenvolvimento
+
+**A instalação e inicialização são 4 etapas!**
+1. Clone este repositório
+2. Entre na pasta descompactada
+3. Instale as dependencias com Maeven
+4. Rode o projeto com a propria IDE.
+
