@@ -1,11 +1,9 @@
 package controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
 import javax.enterprise.context.RequestScoped;
 import model.Produto;
 import repository.ProdutosRepository;
@@ -21,11 +19,11 @@ public class GestaoProdutosBean {
 	@Inject
 	private ProdutosRepository produtosRepository;
 
-	private Produto produtoSelecionado;
-	
 	private Long idProdutoExclusao;
 
 	private Produto produto = new Produto();
+
+	private String nomePesquisa;
 
 	public void salvar() {
 		System.out.println(produto.toString());
@@ -33,7 +31,6 @@ public class GestaoProdutosBean {
 		produto = new Produto();
 	}
 
-	// getters and setters
 	public Produto getProduto() {
 		return produto;
 	}
@@ -65,36 +62,47 @@ public class GestaoProdutosBean {
 			produtosRepository.atualizarProduto(produto);
 			produto = new Produto();
 		} catch (IllegalArgumentException e) {
-			// Lógica de tratamento de erro, se necessário
-			// Por exemplo: exibir uma mensagem de erro para o usuário
+			System.out.println("ERROR: " + e);
 		}
 	}
-	
+
 	public void excluir() {
-	    System.out.println("CHEGOU AQUI");
-	    try {
-	        Produto produto = produtosRepository.getProduto(idProdutoExclusao);
-	        System.out.println("CHEGOU AQUI2");
-	        if (produto != null) {
-	             System.out.println("CHEGOU AQUI3");
-	            System.out.println("Excluindo o produto com ID: " + idProdutoExclusao);
-	            produtosService.excluir(produto);
-	            // Após excluir o produto, podemos limpar o campo idProdutoExclusao
-	            idProdutoExclusao = null;
-	        } else {
-	             System.out.println("CHEGOU AQUI4");
-	            System.out.println("Produto com ID: " + idProdutoExclusao + " não encontrado.");
-	        }
-	    } catch (Exception e) {
-	         System.out.println("CHEGOU AQUI" + e);
-	    }
+		try {
+			Produto produto = produtosRepository.getProduto(idProdutoExclusao);
+			if (produto != null) {
+				System.out.println("Excluindo o produto com ID: " + idProdutoExclusao);
+				produtosService.excluir(produto);
+				idProdutoExclusao = null;
+			} else {
+				System.out.println("Produto com ID: " + idProdutoExclusao + " não encontrado.");
+			}
+		} catch (Exception e) {
+			System.out.println("ERROR " + e);
+		}
 	}
+
 	public Long getIdProdutoExclusao() {
-	    return this.idProdutoExclusao;
+		return this.idProdutoExclusao;
 	}
 
 	public void setIdProdutoExclusao(Long idProdutoExclusao) {
-	    this.idProdutoExclusao = idProdutoExclusao;
+		this.idProdutoExclusao = idProdutoExclusao;
 	}
-	
+
+    public String getNomePesquisa() {
+        return this.nomePesquisa;
+    }
+
+    public void setNomePesquisa(String nomePesquisa) {
+        this.nomePesquisa = nomePesquisa;
+    }
+
+    public void realizarPesquisa() {
+        if (nomePesquisa != null && !nomePesquisa.isEmpty()) {
+            produtos = produtosRepository.pesquisar(nomePesquisa);
+        } else {
+            listarProdutos();
+        }
+    }
+
 }

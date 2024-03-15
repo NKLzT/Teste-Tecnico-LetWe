@@ -2,39 +2,38 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Atualizar Produto</title>
 </h:head>
 <h:body>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="ID:" for="id" />
-			<h:inputText id="id" value="#{xyz.produto.id}" required="true"
+	<h:form id="form">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="ID:" for="id" />
+			<p:inputText id="id" value="#{xyz.produto.id}" required="true"
 				requiredMessage="O campo ID é obrigatório." />
-			<h:message for="id" style="color:red" />
+			<p:message for="id" style="color:red" />
 
-			<h:outputLabel value="Nome:" for="nome" />
-			<h:inputText id="nome" value="#{xyz.produto.nome}" required="true"
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" value="#{xyz.produto.nome}" required="true"
 				requiredMessage="O campo Nome é obrigatório." />
-			<h:message for="nome" style="color:red" />
+			<p:message for="nome" style="color:red" />
 
-			<h:outputLabel value="Descrição:" for="descricao" />
-			<h:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
+			<p:outputLabel value="Descrição:" for="descricao" />
+			<p:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
 
-			<h:outputLabel value="Preço:" for="preco" />
-			<h:inputText id="preco" value="#{xyz.produto.preco}" required="true"
+			<p:outputLabel value="Preço:" for="preco" />
+			<p:inputText id="preco" value="#{xyz.produto.preco}" required="true"
 				requiredMessage="O campo Preço é obrigatório.">
 				<f:convertNumber minFractionDigits="2" />
-			</h:inputText>
-			<h:message for="preco" style="color:red" />
-		</h:panelGrid>
+			</p:inputText>
+			<p:message for="preco" style="color:red" />
+		</p:panelGrid>
 
-		<h:commandButton value="Atualizar" action="#{xyz.atualizar()}" />
-		
-		<h:commandButton value="Voltar" action="#{xyz.voltar()}" immediate="true"/>
-		
-		
+		<p:commandButton value="Atualizar" action="#{xyz.atualizar}" update=":form" />
+		<p:commandButton value="Voltar" action="#{xyz.voltar}"
+			immediate="true" update=":form" />
 	</h:form>
 </h:body>
 </html>
