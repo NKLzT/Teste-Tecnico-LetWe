@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -17,12 +20,14 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nome não pode estar em branco")
     @Column(name = "Nome", nullable = false)
     private String nome;
 
     @Column(name = "Descricao")
     private String descricao;
 
+    @NotNull(message = "Preço não pode ser nulo")
     @Column(name = "Preco", nullable = false)
     private Double preco;
 

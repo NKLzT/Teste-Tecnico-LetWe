@@ -6,10 +6,28 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Atualizar Produto</title>
+		<style>
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #333;
+}
+
+</style>
+	
 </h:head>
 <h:body>
 	<h:form id="form">
-		<p:panelGrid columns="2">
+		<p:panelGrid columns="1">
 			<p:outputLabel value="ID:" for="id" />
 			<p:inputText id="id" value="#{xyz.produto.id}" required="true"
 				requiredMessage="O campo ID é obrigatório." />

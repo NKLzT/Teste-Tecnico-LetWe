@@ -1,3 +1,2 @@
 model\Produto.class
 repository\ProdutosRepository.class
-repository\CamadaPersistencia.class

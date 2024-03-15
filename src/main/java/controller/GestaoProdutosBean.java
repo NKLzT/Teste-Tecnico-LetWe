@@ -69,22 +69,18 @@ public class GestaoProdutosBean {
 	}
 	
 	public void excluir() {
-	    System.out.println("CHEGOU AQUI");
 	    try {
 	        Produto produto = produtosRepository.getProduto(idProdutoExclusao);
-	        System.out.println("CHEGOU AQUI2");
 	        if (produto != null) {
-	             System.out.println("CHEGOU AQUI3");
 	            System.out.println("Excluindo o produto com ID: " + idProdutoExclusao);
 	            produtosService.excluir(produto);
 	            // Após excluir o produto, podemos limpar o campo idProdutoExclusao
 	            idProdutoExclusao = null;
 	        } else {
-	             System.out.println("CHEGOU AQUI4");
 	            System.out.println("Produto com ID: " + idProdutoExclusao + " não encontrado.");
 	        }
 	    } catch (Exception e) {
-	         System.out.println("CHEGOU AQUI" + e);
+	         System.out.println("ERROR " + e);
 	    }
 	}
 	public Long getIdProdutoExclusao() {

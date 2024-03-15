@@ -5,21 +5,39 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Atualizar Produto</title>
+	<title>Letwe Gestão de Produtos</title>
+	<style>
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #333;
+}
+</style>
 </h:head>
 <h:body>
 	<h:form id="form">
-		<p:panelGrid columns="2">
-			<p:outputLabel value="Nome:" for="nome" />
-			<p:inputText id="nome" value="#{xyz.produto.nome}" required="true"
-				requiredMessage="O campo Nome é obrigatório." />
+		<p:panelGrid columns="1">
+			<p:outputLabel style="float: left" value="Nome:" for="nome" />
+			<p:inputText styleClass="input" id="nome" value="#{xyz.produto.nome}"
+				required="true" requiredMessage="O campo Nome é obrigatório." />
 			<p:message for="nome" style="color:red" />
 
-			<p:outputLabel value="Descrição:" for="descricao" />
-			<p:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
+			<p:outputLabel style="left" value="Descrição:" for="descricao" />
+			<p:inputTextarea styleClass="input" id="descricao"
+				value="#{xyz.produto.descricao}" />
 
-			<p:outputLabel value="Preço:" for="preco" />
-			<p:inputText id="preco" value="#{xyz.produto.preco}" required="true"
+			<p:outputLabel styleClass="label" value="Preço:" for="preco" />
+			<p:inputText styleClass="input" id="preco"
+				value="#{xyz.produto.preco}" required="true"
 				requiredMessage="O campo Preço é obrigatório.">
 				<f:convertNumber minFractionDigits="2" />
 			</p:inputText>
