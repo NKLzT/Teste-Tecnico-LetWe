@@ -4,28 +4,25 @@
 
 ![LOGO_LETWE](https://letwe.com.br/wp-content/uploads/2022/08/LOGO_LETWE-OFICIAL.svg)
 
-<div>
-    <p align="center">
-    TESTE TECNICO LETWE
-    </p>
+<div align="center">
+    <p>TESTE TÉCNICO LETWE</p>
 </div>
 
 ## 📝Perguntas
---Teste Conceitual: Java, PrimeFaces, JSF, Hibernate, MySQL
-ava Fundamentals:
+
+**Teste Conceitual: Java, PrimeFaces, JSF, Hibernate, MySQL**
+
+### Java Fundamentals:
+
 a. Explique o conceito de polimorfismo em Java e forneça um exemplo prático.
 
-Polimorfismo é basicamente a capacidade de um objeto poder ser referenciado de varias formas.
-No Java o polimorfismo permite que um objeto seja tratado como uma instacia de sua propria classe, de uma suplerclasse ou de qualquer interface que a classe implemente.
-
+```java
 // Classe abstrata Animal
-
 abstract class Animal {
     abstract void som();
 }
 
 // Classe Cachorro que herda de Animal
-
 class Cachorro extends Animal {
     void som() {
         System.out.println("Au Au");
@@ -33,7 +30,6 @@ class Cachorro extends Animal {
 }
 
 // Classe Gato que herda de Animal
-
 class Gato extends Animal {
     void som() {
         System.out.println("Miau");
@@ -41,7 +37,6 @@ class Gato extends Animal {
 }
 
 // Classe principal
-
 public class Main { 
     public static void main(String[] args) {
         Animal meuCachorro = new Cachorro(); // Cachorro é um Animal
