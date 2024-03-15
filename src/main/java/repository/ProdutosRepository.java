@@ -3,88 +3,74 @@ package repository;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import model.Produto;
 
 public class ProdutosRepository {
-    @Inject
-    private EntityManager manager;
 
-    public ProdutosRepository() {
+	@Inject
+	private EntityManager manager;
 
-    }
+	public ProdutosRepository() {
 
-    public ProdutosRepository(EntityManager manager) {
-        this.manager = manager;
-    }
+	}
 
-    public Produto getProduto(Long id) {
-        return manager.find(Produto.class, id);
-    }
+	public ProdutosRepository(EntityManager manager) {
+		this.manager = manager;
+	}
 
-    public List<Produto> pesquisar(String nome) {
-        TypedQuery<Produto> query = manager.createQuery("from Produto where nome like :nome", Produto.class);
-        query.setParameter("nome", nome + "%");
-        return query.getResultList();
-    }
+	public Produto getProduto(Long id) {
+		if (id == null) {
+			throw new IllegalArgumentException("ID do produto não pode ser nulo");
+		}
+		return manager.find(Produto.class, id);
+	}
 
-    public Produto salvarProduto(Produto produto) {
-        EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            produto = manager.merge(produto);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
-        return produto;
-    }
+	public List<Produto> pesquisar(String nome) {
+		TypedQuery<Produto> query = manager.createQuery("from Produto where nome like :nome", Produto.class);
+		query.setParameter("nome", nome + "%");
+		return query.getResultList();
+	}
 
-    public void remover(Produto produto) {
-        EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            produto = getProduto(produto.getId());
-            manager.remove(produto);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
-    }
+	public Produto salvarProduto(Produto produto) {
+		try {
+			produto = manager.merge(produto);
+		} catch (RuntimeException e) {
+			throw e;
+		}
+		return produto;
+	}
 
-    public Produto atualizarProduto(Produto produto) {
-        EntityTransaction transaction = manager.getTransaction();
-        try {
-            transaction.begin();
-            Produto produtoExistente = getProduto(produto.getId());
-            if (produtoExistente != null) {
-                produtoExistente.setNome(produto.getNome());
-                produtoExistente.setDescricao(produto.getDescricao());
-                produtoExistente.setPreco(produto.getPreco());
-                manager.merge(produtoExistente);
-            } else {
-                throw new IllegalArgumentException("Produto não encontrado para atualização.");
-            }
-            transaction.commit();
-            return produtoExistente;
-        } catch (RuntimeException e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        }
-    }
+	public void remover(Produto produto) {
+		try {
+			produto = getProduto(produto.getId());
+			manager.remove(produto);
+		} catch (RuntimeException e) {
 
+			throw e;
+		}
+	}
 
-    public List<Produto> listarTodos() {
-        TypedQuery<Produto> query = manager.createQuery("from Produto", Produto.class);
-        return query.getResultList();
-    }
+	public Produto atualizarProduto(Produto produto) {
+		try {
+			Produto produtoExistente = getProduto(produto.getId());
+			if (produtoExistente != null) {
+				produtoExistente.setNome(produto.getNome());
+				produtoExistente.setDescricao(produto.getDescricao());
+				produtoExistente.setPreco(produto.getPreco());
+				manager.merge(produtoExistente);
+			} else {
+				throw new IllegalArgumentException("Produto não encontrado para atualização.");
+			}
+			return produtoExistente;
+		} catch (RuntimeException e) { 
+			throw e;
+		}
+	}
+	
+	public List<Produto> listarTodos() {
+		TypedQuery<Produto> query = manager.createQuery("from Produto", Produto.class);
+		return query.getResultList();
+	}
+
 }

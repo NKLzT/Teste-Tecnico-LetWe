@@ -2,53 +2,74 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Gestão de Produtos</title>
 </h:head>
 <h:body>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Nome:" for="nome" />
-			<h:inputText id="nome" value="#{xyz.produto.nome}" required="true"
+	<h:form id="form">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" value="#{xyz.produto.nome}" required="true"
 				requiredMessage="O campo Nome é obrigatório." />
-			<h:message for="nome" style="color:red" />
+			<p:message for="nome" style="color:red" />
 
-			<h:outputLabel value="Descrição:" for="descricao" />
-			<h:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
+			<p:outputLabel value="Descrição:" for="descricao" />
+			<p:inputTextarea id="descricao" value="#{xyz.produto.descricao}" />
 
-			<h:outputLabel value="Preço:" for="preco" />
-			<h:inputText id="preco" value="#{xyz.produto.preco}" required="true"
+			<p:outputLabel value="Preço:" for="preco" />
+			<p:inputText id="preco" value="#{xyz.produto.preco}" required="true"
 				requiredMessage="O campo Preço é obrigatório.">
 				<f:convertNumber minFractionDigits="2" />
-			</h:inputText>
-			<h:message for="preco" style="color:red" />
-		</h:panelGrid>
+			</p:inputText>
+			<p:message for="preco" style="color:red" />
+		</p:panelGrid>
 
-		<h:commandButton value="Salvar" action="#{xyz.salvar}" />
-		<h:commandButton value="Atualizar" action="#{xyz.prepararAtualizacao}" immediate="true"/>
-		<h:commandButton value="Listar Produtos"
-			action="#{xyz.listarProdutos}" immediate="true" />
+		<p:commandButton value="Salvar" action="#{xyz.salvar}" update=":form" />
+		<p:commandButton value="Atualizar" action="#{xyz.prepararAtualizacao}"
+			immediate="true" update=":form" />
+		<p:commandButton value="Listar Produtos"
+			action="#{xyz.listarProdutos}" immediate="true" update=":form" />
 
-		<h:dataTable value="#{xyz.produtos}" var="produto"
+
+		<p:dataTable value="#{xyz.produtos}" var="produto"
 			rendered="#{not empty xyz.produtos}">
-			<h:column>
+			<p:column>
 				<f:facet name="header">ID</f:facet>
                 #{produto.id}
-            </h:column>
-			<h:column>
+            </p:column>
+			<p:column>
 				<f:facet name="header">Nome</f:facet>
                 #{produto.nome}
-            </h:column>
-			<h:column>
+            </p:column>
+			<p:column>
 				<f:facet name="header">Descrição</f:facet>
                 #{produto.descricao}
-            </h:column>
-			<h:column>
+            </p:column>
+			<p:column>
 				<f:facet name="header">Preço</f:facet>
                 #{produto.preco}
-            </h:column>
-		</h:dataTable>
+            </p:column>
+		</p:dataTable>
+
+
+		<p:commandButton value="Excluir" onclick="PF('dialogExcluir').show()"
+			type="button" />
+
+		<p:dialog header="Excluir Produto" widgetVar="dialogExcluir"
+			modal="true">
+			<p:outputLabel value="ID do produto a excluir:" for="idExclusao" />
+			<p:inputText id="idExclusao" value="#{xyz.idProdutoExclusao}"
+				required="true" requiredMessage="O campo ID é obrigatório." />
+			<p:message for="idExclusao" style="color:red" />
+
+			<p:commandButton value="Confirmar exclusão" action="#{xyz.excluir}"
+				oncomplete="PF('dialogExcluir').hide()" update=":form"
+				process="@this idExclusao" />
+
+
+		</p:dialog>
 	</h:form>
 </h:body>
 </html>
